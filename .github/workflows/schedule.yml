@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *'
+name: Schedule
+jobs:
+  demo:
+    name: Demo
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Copy
+        shell: powershell
+        run: |
+          $timestamp = [System.DateTime]::Now.Ticks

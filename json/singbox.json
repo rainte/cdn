@@ -29,7 +29,6 @@
   ],
   "outbounds": [
     {
-      "disable_mtu_discovery": false,
       "type": "shadowtls",
       "tag": "stl-6243",
       "server": "172.83.156.157",

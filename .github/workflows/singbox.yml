@@ -10,23 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        id: step1
-      - uses: actions/setup-python@v4
-        id: step2
+      - name: step1
+        uses: actions/checkout@v4
+      - name: step2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
           architecture: x64
-      - run: pip install requests
-        id: step3
+      - name: step3
         needs: step2
-      - run: python singbox/bootstrap.py
-        id: step4
+        run: pip install requests
+      - name: step4
         needs: [step1, step3]
-      - run: |
+        run: python singbox/bootstrap.py
+      - name: step5
+        needs: step4
+        run: |
           git config --local user.name "Sean"
           git config --local user.email "sxfmao@163.com"
           git add .
           git commit -m "commit"
           git push
-        needs: step4

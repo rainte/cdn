@@ -15,18 +15,17 @@ def singbox(dir):
     }
 
     config = json.loads(default)
+    outbounds = config["outbounds"]
     os.makedirs(pc, exist_ok=True)
     os.makedirs(mobile, exist_ok=True)
     for key, value in map.items():
         response = requests.get(value, verify=False)
         if response.status_code == 200:
             data = response.json()
-
             with open(pc + "/" + key + ".json", "w") as file:
                 json.dump(data, file)
 
-            config["outbounds"] = data["outbounds"] + config["outbounds"]
-
+            config["outbounds"] = data["outbounds"] + outbounds
             with open(mobile + "/" + key + ".json", "w") as file:
                 json.dump(config, file)
 

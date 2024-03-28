@@ -1,4 +1,4 @@
-name: Singbox
+name: singbox
 
 on:
   workflow_dispatch:

@@ -1,0 +1,25 @@
+name: Singbox
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+          architecture: x64
+      - run: pip install requests
+      - run: python singbox/bootstrap.py
+      - run: |
+          git config --local user.name "Sean"
+          git config --local user.email "sxfmao@163.com"
+          git add .
+          git commit -m "commit"
+          git push

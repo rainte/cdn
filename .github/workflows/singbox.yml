@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: step1
-        uses: actions/checkout@v4
-      - name: step2
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.x
           architecture: x64
-      - name: step3
-        needs: step2
-        run: pip install requests
-      - name: step4
-        needs: [step1, step3]
-        run: python singbox/bootstrap.py
-      - name: step5
-        needs: step4
-        run: |
+      - run: pip install requests
+      - run: python singbox/bootstrap.py
+      - run: |
           git config --local user.name "Sean"
           git config --local user.email "sxfmao@163.com"
-          git add .
-          git commit -m "commit"
-          git push
+      - run: |
+          if ! git diff --exit-code --cached; then
+            git add .
+            git commit -m "commit"
+            echo "::set-output name=isChange::true"
+          else
+            echo "::set-output name=isChange::false"
+          fi
+        id: check
+      - run: git push
+        if: steps.check.outputs.isChange == 'true'

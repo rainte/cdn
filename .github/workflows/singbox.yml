@@ -24,10 +24,10 @@ jobs:
           if ! git diff --exit-code --cached; then
             git add .
             git commit -m "commit"
-            echo "::set-output name=isChange::true"
+            echo "isChange=true" > output.env
           else
-            echo "::set-output name=isChange::false"
+            echo "isChange=false" > output.env
           fi
         id: check
       - run: git push
-        if: steps.check.outputs.isChange == 'true'
+        if: ${{ env.isChange == 'true' }}

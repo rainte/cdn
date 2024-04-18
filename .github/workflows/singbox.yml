@@ -24,7 +24,7 @@ jobs:
       - run: |
           git add -A
           if ! git diff --exit-code --cached; then
-            git commit -m "Update singbox."
+            git commit -m "Update singbox"
             git push
             echo -e "\033[0;33m========== changed ==========\033[0m"
           else

@@ -22,8 +22,8 @@ jobs:
           git config user.name "${{ vars.GIT_NAME }}"
           git config user.email "${{ vars.GIT_EMAIL }}"
       - run: |
+          git add -A
           if ! git diff --exit-code --cached; then
-            git add .
             git commit -m "Update singbox."
             echo -e "\033[0;33m========== changed ==========\033[0m"
             echo "isChange=true" > output.env

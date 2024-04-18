@@ -25,14 +25,8 @@ jobs:
           git add -A
           if ! git diff --exit-code --cached; then
             git commit -m "Update singbox."
+            git push
             echo -e "\033[0;33m========== changed ==========\033[0m"
-            echo "isChange=true" > output.env
           else
             echo -e "\033[0;33m========== unchanged ==========\033[0m"
-            echo "isChange=false" > output.env
           fi
-          source output.env
-          echo -e "\033[0;33m========== isChange: ${{ env.isChange }} ==========\033[0m"
-        id: check
-      - run: git push
-        if: ${{ env.isChange == 'true' }}

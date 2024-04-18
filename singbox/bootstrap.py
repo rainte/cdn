@@ -2,6 +2,7 @@ import requests
 import json
 import os
 
+
 def singbox(dir):
     pc = dir + "/pc"
     mobile = dir + "/mobile"
@@ -11,7 +12,7 @@ def singbox(dir):
         "config1": "https://www.gitlabip.xyz/Alvin9999/pac2/master/singbox/1/config.json",
         "config2": "https://gitlab.com/free9999/ipupdate/-/raw/master/singbox/config.json",
         "config3": "https://www.githubip.xyz/Alvin9999/pac2/master/singbox/config.json",
-        "config4": "https://fastly.jsdelivr.net/gh/Alvin9999/pac2@latest/singbox/config.json"
+        "config4": "https://fastly.jsdelivr.net/gh/Alvin9999/pac2@latest/singbox/config.json",
     }
 
     config = json.loads(default)
@@ -28,5 +29,6 @@ def singbox(dir):
             config["outbounds"] = data["outbounds"] + outbounds
             with open(mobile + "/" + key + ".json", "w") as file:
                 json.dump(config, file)
+
 
 singbox("./singbox")

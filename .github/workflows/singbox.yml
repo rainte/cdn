@@ -24,10 +24,10 @@ jobs:
           if ! git diff --exit-code --cached; then
             git add .
             git commit -m "Update singbox."
-            echo "changed"
+            echo -e "\033[0;33m========== changed ==========\033[0m"
             echo "isChange=true" > output.env
           else
-            echo "unchanged"
+            echo -e "\033[0;33m========== unchanged ==========\033[0m"
             echo "isChange=false" > output.env
           fi
         id: check

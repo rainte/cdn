@@ -3,12 +3,7 @@ import json
 import os
 
 
-def singbox(dir):
-    pc = dir + "/pc"
-    mobile = dir + "/mobile"
-    os.makedirs(pc, exist_ok=True)
-    os.makedirs(mobile, exist_ok=True)
-
+def singbox(pc, mobile):
     default = '{"dns":{"servers":[{"tag":"google","address":"tls://8.8.8.8"},{"tag":"local","address":"223.5.5.5","detour":"direct"}],"rules":[{"outbound":"any","server":"local"}]},"inbounds":[{"type":"tun","inet4_address":"172.19.0.1/30","inet6_address":"fdfe:dcba:9876::1/126","auto_route":true,"sniff":true}],"outbounds":[{"type":"direct","tag":"direct"},{"type":"dns","tag":"dns-out"}],"route":{"rules":[{"protocol":"dns","outbound":"dns-out"},{"geoip":"private","outbound":"direct"}],"auto_detect_interface":true}}'
     urls = {
         "config1": "https://www.gitlabip.xyz/Alvin9999/pac2/master/singbox/1/config.json",
@@ -20,7 +15,7 @@ def singbox(dir):
     config = json.loads(default)
     outbounds = config["outbounds"]
     for key, value in urls.items():
-        response = requests.get(value, verify=False)
+        response = requests.get(value, verify=True)
         if response.status_code == 200:
             data = response.json()
             with open(pc + "/" + key + ".json", "w") as file:
@@ -31,4 +26,13 @@ def singbox(dir):
                 json.dump(config, file)
 
 
-singbox("./singbox")
+pc = "./singbox/pc"
+mobile = "./singbox/mobile"
+os.makedirs(pc, exist_ok=True)
+os.makedirs(mobile, exist_ok=True)
+
+folder_contents = os.listdir(mobile)
+for item in folder_contents:
+    print(item)
+
+singbox(pc, mobile)

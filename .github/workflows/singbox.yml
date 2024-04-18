@@ -27,11 +27,12 @@ jobs:
             git commit -m "Update singbox."
             echo -e "\033[0;33m========== changed ==========\033[0m"
             echo "isChange=true" > output.env
-            echo -e "\033[0;33m========== ${{ env.isChange }} ==========\033[0m"
           else
             echo -e "\033[0;33m========== unchanged ==========\033[0m"
             echo "isChange=false" > output.env
           fi
+          source output.env
+          echo -e "\033[0;33m========== isChange: ${{ env.isChange }} ==========\033[0m"
         id: check
       - run: git push
-        if: ${{ env.isChange == true }}
+        if: ${{ env.isChange == 'true' }}

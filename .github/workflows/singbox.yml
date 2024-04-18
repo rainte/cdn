@@ -17,6 +17,7 @@ jobs:
           architecture: x64
       - run: pip install requests
       - run: python singbox/build.py
+      - run: ls singbox/mobile
       - run: |
           git config user.name "${{ vars.GIT_NAME }}"
           git config user.email "${{ vars.GIT_EMAIL }}"

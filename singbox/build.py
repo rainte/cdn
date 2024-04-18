@@ -30,9 +30,4 @@ pc = "./singbox/pc"
 mobile = "./singbox/mobile"
 os.makedirs(pc, exist_ok=True)
 os.makedirs(mobile, exist_ok=True)
-
-folder_contents = os.listdir(mobile)
-for item in folder_contents:
-    print(item)
-
 singbox(pc, mobile)

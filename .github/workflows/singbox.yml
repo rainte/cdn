@@ -16,16 +16,18 @@ jobs:
           python-version: 3.x
           architecture: x64
       - run: pip install requests
-      - run: python singbox/bootstrap.py
+      - run: python singbox/build.py
       - run: |
           git config user.name "${{ vars.GIT_NAME }}"
           git config user.email "${{ vars.GIT_EMAIL }}"
       - run: |
           if ! git diff --exit-code --cached; then
             git add .
-            git commit -m "commit"
+            git commit -m "Update singbox."
+            echo "changed"
             echo "isChange=true" > output.env
           else
+            echo "unchanged"
             echo "isChange=false" > output.env
           fi
         id: check

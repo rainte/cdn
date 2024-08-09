@@ -1,5 +1,5 @@
-import requests
-import urllib3
+import requests  # type: ignore
+import urllib3  # type: ignore
 import json
 import os
 

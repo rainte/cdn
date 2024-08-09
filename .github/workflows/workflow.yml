@@ -1,0 +1,28 @@
+name: workflow
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+          architecture: x64
+      - run: pip install requests
+
+  push:
+    steps:
+      - run: |
+          git config user.name "${{ vars.GIT_NAME }}"
+          git config user.email "${{ vars.GIT_EMAIL }}"
+      - run: |
+          git add -A
+          if ! git diff --exit-code --cached; then
+            git commit -m "commit"
+            git push
+            echo -e "\033[0;33m========== changed ==========\033[0m"
+          else
+            echo -e "\033[0;33m========== unchanged ==========\033[0m"
+          fi

@@ -1,4 +1,5 @@
 import requests
+import urllib3
 import json
 import os
 
@@ -32,5 +33,6 @@ urls = {
     "config3.json": "https://www.githubip.xyz/Alvin9999/pac2/master/singbox/config.json",
     "config4.json": "https://fastly.jsdelivr.net/gh/Alvin9999/pac2@latest/singbox/config.json",
 }
+urllib3.disable_warnings()
 pc(urls, "./singbox/pc")
 mobile(urls, "./singbox/mobile")

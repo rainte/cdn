@@ -6,7 +6,7 @@ import os
 def pc(urls, dir):
     os.makedirs(dir, exist_ok=True)
     for key, value in urls.items():
-        response = requests.get(value, verify=True)
+        response = requests.get(value, verify=False)
         if response.status_code == 200:
             res = response.json()
             with open(dir + "/" + key, "w") as file:
@@ -18,7 +18,7 @@ def mobile(urls, dir):
         '{"dns":{"servers":[{"tag":"google","address":"tls://8.8.8.8"},{"tag":"local","address":"223.5.5.5","detour":"direct"}],"rules":[{"outbound":"any","server":"local"}]},"inbounds":[{"type":"tun","inet4_address":"172.19.0.1/30","inet6_address":"fdfe:dcba:9876::1/126","auto_route":true,"sniff":true}],"outbounds":[{"type":"direct","tag":"direct"},{"type":"dns","tag":"dns-out"}],"route":{"rules":[{"protocol":"dns","outbound":"dns-out"},{"geoip":"private","outbound":"direct"}],"auto_detect_interface":true}}'
     )
     for key, value in urls.items():
-        response = requests.get(value, verify=True)
+        response = requests.get(value, verify=False)
         if response.status_code == 200:
             data = response.json()
             res["outbounds"] = data["outbounds"] + res["outbounds"]

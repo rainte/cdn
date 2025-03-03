@@ -28,7 +28,7 @@
     "rules": [
       { "ip_is_private": true, "outbound": "direct" },
       { "rule_set": "geoip-cn", "outbound": "direct" },
-      { "rule_set": "geoip-us", "rule_set_ipcidr_match_source": true, "outbound": "proxy" }
+      { "rule_set": "geoip-us", "rule_set_ip_cidr_match_source": true, "outbound": "proxy" }
     ],
     "rule_set": [
       {

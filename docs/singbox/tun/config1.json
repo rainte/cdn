@@ -1,0 +1,69 @@
+{
+  "$schema": "https://sing-box.sagernet.org/schema.json",
+  "dns": {
+    "servers": [
+      {
+        "type": "https",
+        "tag": "proxy-dns",
+        "server": "1.1.1.1",
+        "detour": "proxy"
+      },
+      {
+        "type": "local",
+        "tag": "local-dns"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "address": [
+        "172.19.0.1/30"
+      ],
+      "auto_route": true,
+      "strict_route": false
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "hysteria",
+      "tag": "proxy",
+      "server": "137.175.82.43",
+      "server_port": 20022,
+      "up_mbps": 20,
+      "down_mbps": 20,
+      "auth_str": "dongtaiwang.com",
+      "tls": {
+        "enabled": true,
+        "insecure": true,
+        "server_name": "bing.com",
+        "alpn": [
+          "h3"
+        ]
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "final": "proxy",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "local-dns",
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct"
+      }
+    ]
+  }
+}

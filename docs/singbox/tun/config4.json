@@ -29,7 +29,7 @@
     {
       "type": "hysteria",
       "tag": "proxy",
-      "server": "62.210.28.175",
+      "server": "62.210.124.132",
       "server_port": 24667,
       "auth_str": "dongtaiwang.com",
       "up_mbps": 11,

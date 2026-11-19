@@ -27,7 +27,7 @@
     {
       "type": "hysteria",
       "tag": "proxy",
-      "server": "137.175.82.42",
+      "server": "137.175.82.41",
       "server_port": 20022,
       "up_mbps": 20,
       "down_mbps": 20,
